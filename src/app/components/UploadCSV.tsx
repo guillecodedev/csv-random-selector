@@ -5,6 +5,7 @@ interface UploadCSVProps {
   setData: (data: any[]) => void;
 }
 
+
 const UploadCSV: React.FC<UploadCSVProps> = ({ setData }) => {
   const { CSVReader } = useCSVReader();
 
@@ -43,7 +44,7 @@ const UploadCSV: React.FC<UploadCSVProps> = ({ setData }) => {
       addRemoveButton
       onRemoveFile={handleOnRemoveFile}
     >
-      {({ getRootProps, acceptedFile, ProgressBar, getRemoveFileProps }) => (
+      {({ getRootProps, acceptedFile, ProgressBar, getRemoveFileProps }: any) => (
         <>
           <div {...getRootProps()} className="button button-blue">
             {acceptedFile ? acceptedFile.name : 'Arrastra y suelta aquí tu archivo CSV o haz clic para cargarlo.'}
