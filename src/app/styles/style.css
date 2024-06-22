@@ -1,0 +1,81 @@
+.container {
+    background-color: #0c4d8a;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.button {
+    
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px !important;
+}
+
+.button:disabled {
+    
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button-blue {
+    background-color: #0a3a69;
+}
+
+.button-blue:disabled {
+    background-color: #0a3a69;
+}
+
+.button-red {
+    background-color: #69100a;
+}
+
+.button-red:disabled {
+    background-color: #69100a;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: #000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+
+.margin-top{
+    margin-top: 20px;
+}
+
+.record-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.record-field strong {
+    font-weight: bold;
+}
+
+.record-field span {
+    margin-left: 10px;
+}
