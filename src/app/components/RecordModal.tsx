@@ -25,7 +25,7 @@ const RecordModal: React.FC<RecordModalProps> = ({ record, onClose }) => {
         {Object.entries(record).map(([field, value], index) => (
           <div key={index} className='record-field'>
             <strong>{field}:</strong>
-            <span>{value}</span>
+            <span>{String(value)}</span>
           </div>
         ))}
         <button className='button button-red' onClick={onClose}>Cerrar</button>
