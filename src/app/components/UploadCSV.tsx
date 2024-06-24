@@ -50,7 +50,9 @@ const UploadCSV: React.FC<UploadCSVProps> = ({ setData, cleanData }) => {
           <div {...getRootProps()} className="button button-blue">
             {acceptedFile ? acceptedFile.name : 'Arrastra y suelta aquí tu archivo CSV o haz clic para cargarlo.'}
           </div>
-          <ProgressBar />
+
+          <ProgressBar  />
+          
           {acceptedFile && (
             <div
               {...getRemoveFileProps()}
