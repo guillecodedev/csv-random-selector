@@ -3,10 +3,11 @@ import { useCSVReader } from 'react-papaparse';
 
 interface UploadCSVProps {
   setData: (data: any[]) => void;
+  cleanData: () => void;
 }
 
 
-const UploadCSV: React.FC<UploadCSVProps> = ({ setData }) => {
+const UploadCSV: React.FC<UploadCSVProps> = ({ setData, cleanData }) => {
   const { CSVReader } = useCSVReader();
 
   const handleOnDrop = (data: any[]) => {
@@ -20,8 +21,7 @@ const UploadCSV: React.FC<UploadCSVProps> = ({ setData }) => {
       const values = record.map((value: string) => value.trim());
       const recordObj: { [key: string]: string } = {};
       headers.forEach((header: any, index: any) => {
-        recordObj[header] = values[index] || ''; // Si no hay valor, asignar cadena vacía
-        console.log(header, recordObj[header]);
+        recordObj[header] = values[index] || '';
       });
       return recordObj;
     });
@@ -35,6 +35,7 @@ const UploadCSV: React.FC<UploadCSVProps> = ({ setData }) => {
 
   const handleOnRemoveFile = () => {
     setData([]);
+    cleanData();
   };
 
   return (
@@ -44,16 +45,26 @@ const UploadCSV: React.FC<UploadCSVProps> = ({ setData }) => {
       addRemoveButton
       onRemoveFile={handleOnRemoveFile}
     >
-      {({ getRootProps, acceptedFile, ProgressBar, getRemoveFileProps }: any) => (
+      {({ getRootProps, acceptedFile, ProgressBar, getRemoveFileProps, Remove }: any) => (
         <>
           <div {...getRootProps()} className="button button-blue">
             {acceptedFile ? acceptedFile.name : 'Arrastra y suelta aquí tu archivo CSV o haz clic para cargarlo.'}
           </div>
           <ProgressBar />
           {acceptedFile && (
-            <button {...getRemoveFileProps()} className="button button-red">
-              Remover
-            </button>
+            <div
+              {...getRemoveFileProps()}
+
+                
+              onMouseDown={(event: Event) => {
+                event.preventDefault();
+                handleOnRemoveFile();
+              }}
+            >
+              <button className="button button-red">
+                Remover
+              </button>
+            </div>
           )}
         </>
       )}

@@ -13,7 +13,6 @@ const Home: React.FC = () => {
   const [noMoreRecords, setNoMoreRecords] = useState<boolean>(false);
 
   const handleRandomRecord = () => {
-    console.log(remainingRecords);
     if (remainingRecords.length === 0) {
       setNoMoreRecords(true);
       return;
@@ -22,15 +21,19 @@ const Home: React.FC = () => {
     const record = remainingRecords[randomIndex];
     setModalRecord(record);
     setRemainingRecords(remainingRecords.filter((_, i) => i !== randomIndex));
-    console.log(remainingRecords);
   };
 
   const handleSetData = (records: any[]) => {
-    console.log(records);
     setData(records);
     setRemainingRecords(records);
     setNoMoreRecords(false);
   };
+
+  const cleanData = () => {
+    setData([]);
+    setRemainingRecords([]);
+    setNoMoreRecords(false);
+  }
 
   return (
     <>
@@ -44,7 +47,7 @@ const Home: React.FC = () => {
         <meta property="og:url" content="https://csv-random-selector.vercel.app/" />
       </Head>
       <div className='container'>
-        <UploadCSV setData={handleSetData} />
+        <UploadCSV setData={handleSetData} cleanData={cleanData} />
         <p className='margin-top'>Registros cargados: {data.length}</p>
         {!noMoreRecords && data.length > 1 && (
           <button className='button button-blue' onClick={handleRandomRecord} disabled={remainingRecords.length === 0}>
