@@ -1,13 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import UploadCSV from '../components/UploadCSV';
-import RecordModal from '../components/RecordModal';
-import { useTranslation } from 'react-i18next';
+import UploadCSV from './UploadCSV';
+import RecordModal from './RecordModal';
+import { useTranslation } from '../../i18n/client'
 
 
-const Home: React.FC = () => {
-  const { t } = useTranslation('common');
+interface HomeProps {
+  lng: any;
+}
+
+
+const Home: React.FC<HomeProps> = ({ lng }) => {
+  const { t } = useTranslation(lng, 'common')
+
   const [data, setData] = useState<any[]>([]);
   const [modalRecord, setModalRecord] = useState<any | null>(null);
   const [remainingRecords, setRemainingRecords] = useState<any[]>([]);
@@ -39,16 +45,16 @@ const Home: React.FC = () => {
   return (
     <>
       <div className='container'>
-        <UploadCSV setData={handleSetData} cleanData={cleanData} />
-        <p className='margin-top'>Registros cargados: {data.length}</p>
+        <UploadCSV setData={handleSetData} cleanData={cleanData} lng={lng} />
+        <p className='margin-top'>{t('loaded_records')} {data.length}</p>
         {!noMoreRecords && data.length > 1 && (
           <button className='button button-blue' onClick={handleRandomRecord} disabled={remainingRecords.length === 0}>
-            Seleccionar Registro Aleatorio
+            {t('select_random_record')}
           </button>
         )}
-        {noMoreRecords && <p className='margin-top'>No hay más registros disponibles.</p>}
+        {noMoreRecords && <p className='margin-top'>{t('no_more_records')}.</p>}
         {modalRecord && (
-          <RecordModal record={modalRecord} onClose={() => setModalRecord(null)} />
+          <RecordModal record={modalRecord} onClose={() => setModalRecord(null)} lng={lng} />
         )}
       </div>
     </>

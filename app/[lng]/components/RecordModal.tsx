@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
+import { useTranslation } from '../../i18n/client'
 
 interface RecordModalProps {
   record: any;
   onClose: () => void;
+  lng: any;
 }
 
 const modalVariants = {
@@ -11,7 +13,9 @@ const modalVariants = {
   exit: { opacity: 0, scale: 0.5 }
 };
 
-const RecordModal: React.FC<RecordModalProps> = ({ record, onClose }) => {
+const RecordModal: React.FC<RecordModalProps> = ({ record, onClose, lng }) => {
+  const { t } = useTranslation(lng, 'common');
+
   return (
     <motion.div
       className='modal'
@@ -28,7 +32,7 @@ const RecordModal: React.FC<RecordModalProps> = ({ record, onClose }) => {
             <span>{String(value)}</span>
           </div>
         ))}
-        <button className='button button-red' onClick={onClose}>Cerrar</button>
+        <button className='button button-red' onClick={onClose}>{t('btn_close')}</button>
       </div>
     </motion.div>
   );

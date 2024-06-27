@@ -1,13 +1,16 @@
 import React from 'react';
 import { useCSVReader } from 'react-papaparse';
+import { useTranslation } from '../../i18n/client'
 
 interface UploadCSVProps {
   setData: (data: any[]) => void;
   cleanData: () => void;
+  lng: any;
 }
 
 
-const UploadCSV: React.FC<UploadCSVProps> = ({ setData, cleanData }) => {
+const UploadCSV: React.FC<UploadCSVProps> = ({ setData, cleanData, lng }) => {
+  const { t } = useTranslation(lng, 'common');
   const { CSVReader } = useCSVReader();
 
   const handleOnDrop = (data: any[]) => {
@@ -48,7 +51,7 @@ const UploadCSV: React.FC<UploadCSVProps> = ({ setData, cleanData }) => {
       {({ getRootProps, acceptedFile, ProgressBar, getRemoveFileProps, Remove }: any) => (
         <>
           <div {...getRootProps()} className="button button-blue">
-            {acceptedFile ? acceptedFile.name : 'Arrastra y suelta aquí tu archivo CSV o haz clic para cargarlo.'}
+            {acceptedFile ? acceptedFile.name : t('btn_upload')}
           </div>
 
           <ProgressBar  />
@@ -64,7 +67,7 @@ const UploadCSV: React.FC<UploadCSVProps> = ({ setData, cleanData }) => {
               }}
             >
               <button className="button button-red">
-                Remover
+                {t('btn_clean')}
               </button>
             </div>
           )}
